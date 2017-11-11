@@ -1,0 +1,106 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: return upstream release codename to registered var
+      command: lsb_release -csu
+      register: upstream_release_codename
+
+    - name: return architecture to registered var
+      command: dpkg --print-architecture
+      register: arch
+
+    - name: return non-become username to registered var
+      become: false
+      command: echo $LOGNAME
+      register: executing_username
+
+    - name: ensure Docker's official GPG key present
+      apt_key:
+        id: 0EBFCD88
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: ensure repository for Docker's stable present
+      apt_repository:
+        repo: |
+          deb
+          [arch={{ arch.stdout }}]
+          https://download.docker.com/linux/ubuntu
+          {{ upstream_release_codename.stdout }}
+          stable
+
+    - name: ensure ppa for Firefox Developer Edition present
+      apt_repository:
+        repo: "ppa:ubuntu-mozilla-daily/firefox-aurora"
+        codename: "{{ upstream_release_codename.stdout }}"
+
+    - name: ensure ppa for git present
+      apt_repository:
+        repo: "ppa:git-core/ppa"
+        codename: "{{ upstream_release_codename.stdout }}"
+
+    - name: ensure apt cache up to date
+      apt:
+        update_cache: yes
+
+    - name: ensure package "docker-ce" latest
+      apt:
+        name: docker-ce
+        state: latest
+
+    - name: ensure group "docker" present
+      group:
+        name: docker
+        state: present
+
+    - name: ensure non-become user group "docker"
+      user:
+        name: "{{ executing_username.stdout }}"
+        groups: docker
+        append: yes
+
+    - name: ensure service "docker" enabled
+      systemd:
+        name: docker
+        enabled: true
+        state: started
+
+    - name: ensure "docker-compose" latest
+      shell: |
+        DOCKER_RELEASE_CURL=$(curl https://github.com/docker/compose/releases/latest 2>/dev/null);
+        DOCKER_COMPOSE_VERSION=$(echo ${DOCKER_RELEASE_CURL} | sed 's:.*/tag/::' | sed 's:">.*$::' );
+        sudo curl -o /usr/local/bin/docker-compose -L "https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)";
+        sudo chmod +x /usr/local/bin/docker-compose;
+        docker-compose -v;
+
+    - name: ensure package "firefox" latest
+      apt:
+        name: firefox
+        state: latest
+
+    - name: ensure package "git" latest
+      apt:
+        name: git
+        state: latest
+
+    - name: ensure package "vim" latest
+      apt:
+        name: vim
+        state: latest
+
+    - name: ensure package "autokey-gtk" latest
+      apt:
+        name: autokey-gtk
+        state: latest
+
+    - name: ensure package "epiphany-browser" absent
+      apt:
+        name: epiphany-browser
+        state: absent
+
+    - name: ensure "ufw" enabled
+      ufw:
+        state: enabled
+
