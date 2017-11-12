@@ -5,8 +5,13 @@ gsettings set org.pantheon.desktop.gala.keybindings cycle-workspaces-previous "[
 gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['']"
 gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Control><Super>Up']"
 gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
+gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Alt>Above_Tab']"
+gsettings set org.gnome.desktop.wm.keybindings switch-group-backward "['<Shift><Alt>Above_Tab']"
 gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Super>Tab']"
 gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Super><Shift>Tab']"
 
 # Symlink autokey directory
-ln -s `pwd`/Mac\ Bindings/ ~/.config/autokey/data/Mac\ Bindings
+AUTOKEY_DIR="$HOME/.config/autokey/data/Mac Bindings"
+rm -fr "$AUTOKEY_DIR"
+ln -s `pwd`/Mac\ Bindings/ "$AUTOKEY_DIR"
+
