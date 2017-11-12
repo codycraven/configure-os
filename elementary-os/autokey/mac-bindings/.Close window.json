@@ -23,7 +23,7 @@
     "showInTrayMenu": false, 
     "matchCase": false, 
     "filter": {
-        "regex": null, 
+        "regex": "^((?!guake.Main.py).)*$",
         "isRecursive": false
     }, 
     "type": "phrase", 

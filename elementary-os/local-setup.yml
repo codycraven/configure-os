@@ -45,6 +45,16 @@
       apt:
         update_cache: yes
 
+    - name: ensure package "xclip" latest
+      apt:
+        name: xclip
+        state: latest
+
+    - name: ensure package "guake" latest
+      apt:
+        name: guake
+        state: latest
+
     - name: ensure package "docker-ce" latest
       apt:
         name: docker-ce

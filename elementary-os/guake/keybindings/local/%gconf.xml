@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="quit" mtime="1510443779" type="string">
+		<stringvalue>disabled</stringvalue>
+	</entry>
+	<entry name="toggle_hide_on_lose_focus" mtime="1510443775" type="string">
+		<stringvalue>disabled</stringvalue>
+	</entry>
+	<entry name="close_tab" mtime="1510441241" type="string">
+		<stringvalue>&lt;Super&gt;w</stringvalue>
+	</entry>
+	<entry name="new_tab" mtime="1510441236" type="string">
+		<stringvalue>&lt;Super&gt;t</stringvalue>
+	</entry>
+</gconf>
