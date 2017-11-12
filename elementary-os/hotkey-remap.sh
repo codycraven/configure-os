@@ -13,5 +13,5 @@ gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Super
 # Symlink autokey directory
 AUTOKEY_DIR="$HOME/.config/autokey/data/Mac Bindings"
 rm -fr "$AUTOKEY_DIR"
-ln -s `pwd`/Mac\ Bindings/ "$AUTOKEY_DIR"
+ln -s `pwd`/autokey/mac-bindings/ "$AUTOKEY_DIR"
 
