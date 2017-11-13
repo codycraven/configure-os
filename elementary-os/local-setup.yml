@@ -55,6 +55,10 @@
         repo: "ppa:git-core/ppa"
         codename: "{{ upstream_release_codename.stdout }}"
 
+    - name: ensure ppa for elementary-tweaks present
+      apt_repository:
+        repo: "ppa:philip.scott/elementary-tweaks"
+
     - name: ensure apt cache up to date
       apt:
         update_cache: yes
@@ -112,6 +116,11 @@
     - name: ensure package "git" latest
       apt:
         name: git
+        state: latest
+
+    - name: ensure package "elementary-tweaks" latest
+      apt:
+        name: elementary-tweaks
         state: latest
 
     - name: ensure package "vim" latest
