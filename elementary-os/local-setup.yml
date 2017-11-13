@@ -124,12 +124,27 @@
         name: autokey-gtk
         state: latest
 
+    - name: ensure package "tlp" latest
+      apt:
+        name: tlp
+        state: latest
+
+    - name: ensure package "tlp-rdw" latest
+      apt:
+        name: tlp-rdw
+        state: latest
+
     - name: ensure package "epiphany-browser" absent
       apt:
         name: epiphany-browser
         state: absent
 
+    - name: ensure service "tlp" enabled
+      systemd:
+        name: tlp
+        enabled: true
+        state: started
+
     - name: ensure "ufw" enabled
       ufw:
         state: enabled
-
