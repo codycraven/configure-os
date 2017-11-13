@@ -31,6 +31,20 @@
           {{ upstream_release_codename.stdout }}
           stable
 
+    - name: ensure Microsoft's official GPG key present
+      apt_key:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+        state: present
+
+    - name: ensure repository for Microsoft's VSCode stable present
+      apt_repository:
+        repo: |
+          deb
+          [arch={{ arch.stdout }}]
+          https://packages.microsoft.com/repos/vscode
+          stable
+          main
+
     - name: ensure ppa for Firefox Developer Edition present
       apt_repository:
         repo: "ppa:ubuntu-mozilla-daily/firefox-aurora"
@@ -84,6 +98,11 @@
         sudo curl -o /usr/local/bin/docker-compose -L "https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)";
         sudo chmod +x /usr/local/bin/docker-compose;
         docker-compose -v;
+
+    - name: ensure package "code" latest
+      apt:
+        name: code
+        state: latest
 
     - name: ensure package "firefox" latest
       apt:
