@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <gconf>
-	<entry name="show_hide" mtime="1510467834" type="string">
-		<stringvalue>&lt;Super&gt;grave</stringvalue>
+	<entry name="show_hide" mtime="1510638862" type="string">
+		<stringvalue>&lt;Alt&gt;grave</stringvalue>
 	</entry>
 </gconf>
