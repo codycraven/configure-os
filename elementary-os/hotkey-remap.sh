@@ -5,7 +5,7 @@ gsettings set org.pantheon.desktop.gala.keybindings cycle-workspaces-previous "[
 
 gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Control><Super>Up']"
 gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
-gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Super>d', '<Super>Down']"
+gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Super>d', '<Super>Down', '<Super>Up']"
 gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Super>Above_Tab']"
 gsettings set org.gnome.desktop.wm.keybindings switch-group-backward "['<Shift><Super>Above_Tab']"
 gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Super>Tab']"
